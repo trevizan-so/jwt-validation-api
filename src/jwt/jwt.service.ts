@@ -8,7 +8,7 @@ export class JwtService implements IJwtService{
     
     constructor(){}
 
-    public validateJWT(token: any): Boolean {
+    public validateJWT(token: any): boolean {
         return true
     }
 

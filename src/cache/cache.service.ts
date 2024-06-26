@@ -11,7 +11,7 @@ export class CacheService implements ICacheService{
     findKey(key:string):any{
         return {}
     };
-    setKey(key:string):void{};
+    setKey(key:string, value:any):void{};
     setKeyWithTTL(key:string,ttl:number):void{};
 
 }

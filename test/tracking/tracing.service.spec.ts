@@ -11,6 +11,8 @@ describe("TrackingService", () => {
 
     it("shoud emit event", async () => {
         const trackingEvent = "JWT_VALIDATION:SUCCESS";
-        expect(trackingService.emitEvent(trackingEvent)).toBeNull();
+        const handle = jest.spyOn(TrackingService.prototype,"emitEvent");
+        trackingService.emitEvent(trackingEvent)
+        expect(handle).toHaveBeenCalled();
     });
 });

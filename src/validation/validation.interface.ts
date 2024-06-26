@@ -1,4 +1,3 @@
-
 export interface IValidationService{
-    validate(token: any): boolean;
+    validate(input: any): any;
 }
