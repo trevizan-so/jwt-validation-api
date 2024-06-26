@@ -1,4 +1,4 @@
 
 export interface IJwtService{
-    validateJWT(token:any):Boolean;
+    validateJWT(token:any):Promise<Boolean>;
 }
