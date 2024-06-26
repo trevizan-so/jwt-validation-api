@@ -37,9 +37,9 @@ yarn-error.log
 /quick-start
 /example_dist
 /example
+/junkyard
 
 # tests
-/test
 /benchmarks/memory
 /coverage
 /.nyc_output
