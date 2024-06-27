@@ -32,14 +32,15 @@ yarn-error.log
 /packages/**/.npmignore
 /packages/**/LICENSE
 *.tsbuildinfo
+.env
 
 # example
 /quick-start
 /example_dist
 /example
+/junkyard
 
 # tests
-/test
 /benchmarks/memory
 /coverage
 /.nyc_output
