@@ -22,6 +22,6 @@ async function bootstrap() {
     //Configuração class-validator
     app.useGlobalPipes(new ValidationPipe());
 
-    await app.listen(3000);
+    await app.listen(80);
 }
 bootstrap();
