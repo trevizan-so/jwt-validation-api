@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { IValidationService } from './validation.interface';
 
@@ -19,7 +19,9 @@ export class ValidationService implements IValidationService{
       private trackingService: TrackingService
     ){}
 
-   validate(input: ValidationInput): ValidationOutput {
+    private readonly logger = new Logger(ValidationService.name);
+
+   async validate(input: ValidationInput): Promise<ValidationOutput> {
 
         const tokenKey = this.createCacheKey(input);
         const cacheHit = this.cacheService.findKey(tokenKey);
@@ -27,7 +29,8 @@ export class ValidationService implements IValidationService{
         let isJWTValid = cacheHit;
 
         if(!cacheHit){
-            isJWTValid = this.jwtService.validateJWT(input.jwt);
+            this.logger.log("Token not found in cache")
+            isJWTValid = await this.jwtService.validateJWT(input.jwt);
             this.cacheService.setKey(tokenKey, isJWTValid);
         }
 

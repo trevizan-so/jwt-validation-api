@@ -1,7 +1,6 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable, Logger } from '@nestjs/common';
 import { IJwtService } from './jwt.interface';
-import { decode, verify } from 'jsonwebtoken';
+import { decode } from 'jsonwebtoken';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import { JwtPayload } from '../dto/JwtPayload.dto';
@@ -12,10 +11,14 @@ export class JwtService implements IJwtService{
     
     constructor(){}
 
+    private readonly logger = new Logger(JwtService.name);
+
     public async validateJWT(token: any): Promise<boolean> {
+
         const obj = this.decodeJwtToJwtPayload(token);
+
         if(!obj){
-            console.log("INVALID JWT") // TODO: mudar para classe de logger
+            this.logger.log("Invalid JWT") // TODO: mudar para classe de logger
             return false
         }
 
@@ -23,9 +26,9 @@ export class JwtService implements IJwtService{
     }
 
     private async validateJwtPayloadBody(payload:JwtPayload){
-        const errors = await validate(payload);
+        const errors = await validate(payload, {whitelist: true, forbidNonWhitelisted: true });
         if(errors.length > 0){
-            console.log(errors[0].constraints) // TODO: mudar para classe de logger
+            this.logger.error(`Jwt is not valid, ${errors[0].constraints?.matches?.toLowerCase() || errors[0].constraints?.whitelistValidation?.toLowerCase()}`) // TODO: mudar para classe de logger
             return false
         }
         return true

@@ -9,7 +9,7 @@ export class CacheService implements ICacheService{
     constructor(){}
 
     findKey(key:string):any{
-        return {}
+        return false
     };
     setKey(key:string, value:any):void{};
     setKeyWithTTL(key:string,ttl:number):void{};

@@ -10,7 +10,7 @@ export class ValidationTransformer {
     public static transformToInput(request: ValidationRequest) {
         let input = new ValidationInput();
 
-        input.setJwt(request.getJwt());
+        input.setJwt(request.jwt);
 
         return input;
     }
