@@ -36,7 +36,7 @@ describe('ValidationController (e2e)', () => {
         authorization: "Bearer TEST_TOKEN" 
       })
       .expect(res=>{
-        expect(res.body.valido).toBe("verdadeiro")
+        expect(res.body.validade).toBe("verdadeiro")
       })
       .expect(200)
   });
@@ -52,7 +52,7 @@ describe('ValidationController (e2e)', () => {
         jwt:TEST_TOKEN_1.token
       })
       .expect(res=>{
-        expect(res.body.valido).toBe("verdadeiro")
+        expect(res.body.validade).toBe("verdadeiro")
       })
       .expect(200)
   });
@@ -67,7 +67,7 @@ describe('ValidationController (e2e)', () => {
         jwt:TEST_TOKEN_2.token
       })
       .expect(res=>{
-        expect(res.body.valido).toBe("falso")
+        expect(res.body.validade).toBe("falso")
       })
       .expect(200)
   });
@@ -82,7 +82,7 @@ describe('ValidationController (e2e)', () => {
         jwt:TEST_TOKEN_3.token
       })
       .expect(res=>{
-        expect(res.body.valido).toBe("falso")
+        expect(res.body.validade).toBe("falso")
       })
       .expect(200)
   });
@@ -97,7 +97,7 @@ describe('ValidationController (e2e)', () => {
         jwt:TEST_TOKEN_4.token
       })
       .expect(res=>{
-        expect(res.body.valido).toBe("falso")
+        expect(res.body.validade).toBe("falso")
       })
       .expect(200)
   });

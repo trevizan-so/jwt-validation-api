@@ -1,7 +1,7 @@
-import { IsNotEmpty, Matches,  IsIn, IsString, MaxLength, ValidateIf, IsNumberString } from 'class-validator';
+import { IsNotEmpty, Matches, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-export class ValidationRequest{
-    @IsNotEmpty()
+export class ValidationQuery{
+    @IsNotEmpty({message: "Please provide a jwt query param"})
     @IsString()
     @Matches(/(^[\w-]*\.[\w-]*\.[\w-]*$)/,{message: "Provided token does not match jwt pattern"})
     @ApiProperty({

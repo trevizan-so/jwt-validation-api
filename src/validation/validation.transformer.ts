@@ -27,7 +27,7 @@ export class ValidationTransformer {
     public static transformToResponse(output: ValidationOutput) {
         let response = new ValidationResponse();
 
-        response.setValido(output.getIsValid() ? VERDADEIRO : FALSO);
+        response.setValidade(output.getIsValid() ? VERDADEIRO : FALSO);
 
         return response;
     }
