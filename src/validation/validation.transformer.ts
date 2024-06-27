@@ -7,10 +7,19 @@ const VERDADEIRO = "verdadeiro";
 const FALSO = "falso";
 
 export class ValidationTransformer {
+    
     public static transformToInput(request: ValidationRequest) {
         let input = new ValidationInput();
 
         input.setJwt(request.jwt);
+
+        return input;
+    }
+
+    public static transformToInputFromParam(param: string) {
+        let input = new ValidationInput();
+
+        input.setJwt(param);
 
         return input;
     }

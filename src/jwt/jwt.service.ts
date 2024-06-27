@@ -18,7 +18,7 @@ export class JwtService implements IJwtService{
         const obj = this.decodeJwtToJwtPayload(token);
 
         if(!obj){
-            this.logger.log("Invalid JWT") // TODO: mudar para classe de logger
+            this.logger.log("Invalid JWT")
             return false
         }
 
@@ -28,7 +28,7 @@ export class JwtService implements IJwtService{
     private async validateJwtPayloadBody(payload:JwtPayload){
         const errors = await validate(payload, {whitelist: true, forbidNonWhitelisted: true });
         if(errors.length > 0){
-            this.logger.error(`Jwt is not valid, ${errors[0].constraints?.matches?.toLowerCase() || errors[0].constraints?.whitelistValidation?.toLowerCase()}`) // TODO: mudar para classe de logger
+            this.logger.error(`Jwt is not valid, ${errors[0].constraints?.matches?.toLowerCase() || errors[0].constraints?.whitelistValidation?.toLowerCase()}`)
             return false
         }
         return true

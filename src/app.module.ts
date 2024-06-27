@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from '../junkyard/app.controller';
-import { AppService } from '../junkyard/app.service';
 import { ConfigModule } from '@nestjs/config';
 
 import { ValidationController } from './validation/validation.controller';
@@ -14,6 +12,6 @@ import { CacheModule } from '@nestjs/cache-manager';
 @Module({
   imports: [ConfigModule.forRoot(), CacheModule.register()],
   controllers: [ValidationController],
-  providers: [AppService, ValidationService, JwtService, CacheService, TrackingService],
+  providers: [ ValidationService, JwtService, CacheService, TrackingService],
 })
 export class AppModule {}
