@@ -1,43 +1,44 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { IValidationService } from './validation.interface';
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { IValidationService } from "./validation.interface";
 
-import { ValidationInput } from '../dto/ValidationInput.dto';
-import { JwtService } from '../jwt/jwt.service';
-import { CacheService } from '../cache/cache.service';
-import { TrackingService } from '../tracking/tracking.service';
+import { ValidationInput } from "../dto/ValidationInput.dto";
+import { JwtService } from "../jwt/jwt.service";
+import { CacheService } from "../cache/cache.service";
+import { TrackingService } from "../tracking/tracking.service";
 
-import { ValidationOutput } from '../dto/ValidationOutput.dto';
+import { ValidationOutput } from "../dto/ValidationOutput.dto";
 
 @Injectable()
-export class ValidationService implements IValidationService{
-    
+export class ValidationService implements IValidationService {
     constructor(
-      private jwtService:JwtService,
-      private cacheService:CacheService,
-      private configService: ConfigService,
-      private trackingService: TrackingService
-    ){}
+        private jwtService: JwtService,
+        private cacheService: CacheService,
+        private trackingService: TrackingService
+    ) {}
 
     private readonly logger = new Logger(ValidationService.name);
 
-   async validate(input: ValidationInput): Promise<ValidationOutput> {
-
+    async validate(input: ValidationInput): Promise<ValidationOutput> {
         const tokenKey = this.createCacheKey(input);
-        const cacheHit = this.cacheService.findKey(tokenKey);
 
-        let isJWTValid = cacheHit;
+        const cachedValue = await this.cacheService.findKey(tokenKey);
 
-        if(!cacheHit){
-            this.logger.log("Token not found in cache")
+        let isJWTValid = cachedValue;
+
+        if (cachedValue === undefined) {
+            this.logger.log("Jwt token not found in cache");
             isJWTValid = await this.jwtService.validateJWT(input.jwt);
+
+            this.logger.log("Setting to cache");
             this.cacheService.setKey(tokenKey, isJWTValid);
+        } else {
+            this.logger.log(`Found value in Cache : ${cachedValue}`);
         }
-
         return new ValidationOutput(isJWTValid);
-   }
+    }
 
-   private createCacheKey(input:ValidationInput){
-        return  `JWT_KEY:${input.jwt}`
-   }
+    private createCacheKey(input: ValidationInput) {
+        return `JWT_KEY:${input.jwt}`;
+    }
 }
