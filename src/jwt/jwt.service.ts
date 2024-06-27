@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { IJwtService } from './jwt.interface';
-import { decode } from 'jsonwebtoken';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
-import { JwtPayload } from '../dto/JwtPayload.dto';
+import { decode } from 'jsonwebtoken';
 
+import { JwtPayload } from '../dto/JwtPayload.dto';
+import { IJwtService } from './jwt.interface';
 
 @Injectable()
 export class JwtService implements IJwtService{

@@ -1,6 +1,7 @@
-import { IsNotEmpty, Matches,  IsIn, IsString, MaxLength, ValidateIf, IsNumberString } from 'class-validator';
-import { checkIfIsPrime } from '../utils/type-format-validation';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, Matches,  IsIn, IsString, MaxLength, ValidateIf, IsNumberString } from 'class-validator';
+
+import { checkIfIsPrime } from '../utils/type-format-validation';
 
 export class JwtPayload{
     @IsNotEmpty()

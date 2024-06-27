@@ -1,8 +1,10 @@
-import { Injectable, UnauthorizedException, Inject, Logger } from "@nestjs/common";
+import { Injectable, Inject, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ICacheService } from "./cache.interface";
-import { CACHE_MANAGER } from "@nestjs/cache-manager";
+
 import { Cache } from "cache-manager";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
+
+import { ICacheService } from "./cache.interface";
 
 @Injectable()
 export class CacheService implements ICacheService {
