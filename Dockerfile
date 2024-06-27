@@ -6,6 +6,6 @@ COPY ./package.json ./
 
 COPY . .
 
-EXPOSE 3000 
+EXPOSE 80 
 
 CMD ["node dist/main"]
