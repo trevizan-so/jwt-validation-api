@@ -1,0 +1,11 @@
+services:
+  web-api:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - BASIC_TOKEN=BASIC_TOKEN
+      - CACHE_TTL=10000
+
+
+
