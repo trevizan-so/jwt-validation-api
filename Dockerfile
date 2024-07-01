@@ -6,6 +6,8 @@ COPY ./package.json ./
 
 COPY . .
 
+RUN npm install
+
 EXPOSE 80 
 
-CMD ["node dist/main"]
+ENTRYPOINT ["npm" "run" "start:prod"]
